@@ -1,0 +1,36 @@
+
+
+2. #include <stdio.h>
+
+3. the difference is that printf takes const char *format and fprintf takes FILE *stream in addition to const char *format
+
+4. printf() writes output to std-out while fprintf() write's output to the given output stream
+
+5. Hello, world!
+
+7. 2
+
+8. #include <unistd.h>
+
+11.
+
+// Carter DeLargy // 2-17-2026 
+// this writes hello world 
+#include <stdio.h>
+#include <unistd.h>
+
+int main(int argc, char* argv[]) {
+    write(STDOUT_FILENO,"Hello, world!\n",14);
+    return 0;
+}
+
+
+
+10. When I try to compile it with gcc, it gives me an error that write is reading 1000 bytes from a region of size 15. 
+This is because it can recognize the buffer I gave is much larger than the needed one.
+
+11. i feel as though i would want to do a C standard library call like fprintf() most of the time because it is guaranteed to exist. 
+this could be if i have a portable program that i want to be able to work anywhere. 
+I might only want to do write() if it ends up being more efficient and i have a program that i know is working on something where the operating system has write().
+
+

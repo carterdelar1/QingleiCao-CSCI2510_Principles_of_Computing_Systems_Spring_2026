@@ -52,13 +52,19 @@ respository.
     exercise, give the `#include` header file(s) needed for this
     function (look right beneath the \"SYNOPSIS\" heading).
 
+    #include <stdio.h>
+
 3.  Now look at the function signatures for both `fprintf()` and the
     `printf()`. What is the difference? (Signature is a name for the
     argument list.)
 
+    the difference is that printf takes const char *format and fprintf takes FILE *stream in addition to const char *format
+
 4.  Look at the first paragraph under the \"DESCRIPTION\" heading. What
     is the described difference between the `printf()` and `fprintf()`
     functions?
+
+    printf() writes output to std-out while fprintf() write's output to the given output stream
 
 5.  Let\'s put our newfound knowledge to use! Quit out of the man page
     by pressing \"q\" and create a text file called
@@ -93,6 +99,8 @@ respository.
     runs correctly then copy and paste your terminal output as the
     answer to this exercise.
 
+    Hello, world!
+
 7.  Great! Now we want to accomplish the same thing but using a system
     call directly, as opposed to the C library. The particular system
     call we want to use is called `write()`. However, if you give the
@@ -103,6 +111,8 @@ respository.
 
     As the answer to this exercise, give the *section number* for system
     calls.
+
+    2
 
 8.  Now, use the answer to the last exercise to look up the
     documentation for the `write()` system call. The syntax you should
@@ -118,6 +128,8 @@ respository.
     exercise, give the header file which must be included to use the
     `write()` system call (again, look beneath the \"SYNOPSIS\"
     statement).
+
+    #include <unistd.h>
 
 9.  Make a copy of your program called `hello_write.c`. The Linux
     terminal command to copy a file is `cp`. In this case, you should
@@ -153,10 +165,24 @@ respository.
     Once you are finished, copy and paste your new program as the answer to
     this exercise.
 
+    // Carter DeLargy // 2-17-2026 
+// this writes hello world 
+#include <stdio.h>
+#include <unistd.h>
+
+int main(int argc, char* argv[]) {
+    write(STDOUT_FILENO,"Hello, world!\n",14);
+    return 0;
+}
+
+
+
 10. Try changing the third argument of `write()` to be much larger than
     your character buffer (say, 1000 or 10000). What do you think happens
     when you do this? Try running the code- does anything usual show up?
     If so, Why do you think this is?
+
+    when i try to compile it with gcc is gives me an error that write is reading 1000 bytes from a region of size 15. this is because it can recognize the buffer i gave is much larger than the needed one.
 
 11. The function `fprintf()` is provided by the *C standard library* and
     is guaranteed to exist for any standards-compliant C language
@@ -168,6 +194,8 @@ respository.
     Thinking as a software developer, speculate a situation when you
     would want to use a C library function and another situation when
     you would want to use an OS system call.
+
+    i feel as though i would want to do a C standard library call like fprintf() most of the time because it is guaranteed to exist. this could be if i have a portable program that i want to be able to work anywhere. I might only want to do write() if it ends up being more efficient and i have a program that i know is working on something where the operating system has write().
 
 12. Now, create a hello.sh to print \"Hello World!\". 
 
