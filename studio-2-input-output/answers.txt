@@ -1,0 +1,48 @@
+1. when you use cat and type something, it then repeats it back in a new line.
+
+2. this fed the cat command the txt file, 
+so it just output the entire txt file to the terminal.
+
+3. in addition to outputting it to the terminal, it also
+created a new.txt file with all the text from mars.txt
+
+4. this makes it so instead of outputting my text in a new line each time,
+it puts that text in a new line in new.txt
+
+5. this works similarly, but cat >> new.txt continues from the first empty line,
+instead of erasing it like cat > new.txt does.
+
+6. i need to include <unist.h>
+
+7. 
+
+8. the return value type is an integer. a zero indicates the end of the file
+
+9. yes, the programs behavior matches fully with cat. whatever you write is repeated.
+it also works so if you do something like "./copy > new.txt" it will
+write to the txt file.
+
+10. i changed the buffersize to 1, and even with that i didn't notice a difference at all.
+i feel as though maybe with larger files it could take longer with a smaller buffer.
+
+11. a large buffer should have less system calls but it means
+it's using more memory, which is a tradeoff
+
+Optional Enrichment Exercises:
+
+1. #include <stdio.h>
+#include <unistd.h>
+
+#define bufferSize 1
+char buffer[bufferSize];
+ssize_t cat_bytes;
+
+int main() {
+    while (fgets(buffer, bufferSize,stdin) != NULL) {
+        fprintf(stdout, "%s", buffer);
+    }
+
+    return 0;
+}
+
+i did that here, using fgets() and fprintf() instead of read() and write().

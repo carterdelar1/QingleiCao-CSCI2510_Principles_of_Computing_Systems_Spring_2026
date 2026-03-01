@@ -6,8 +6,9 @@ char buffer[bufferSize];
 ssize_t cat_bytes;
 
 int main() {
-    while((cat_bytes = read(STDIN_FILENO,buffer,bufferSize)) > 0) {
-        write(STDOUT_FILENO,buffer,cat_bytes);
+    while (fgets(buffer, bufferSize,stdin) != NULL) {
+        fprintf(stdout, "%s", buffer);
     }
+
     return 0;
 }
