@@ -1,0 +1,71 @@
+1.
+
+2. 
+
+3. for (int i = 0; i < strlen(messagePtr); i++) {
+        char char_to_print = messagePtr[i];
+        printf("%c\n", char_to_print);
+    };
+
+4. I think that dereferencing it will point to the first character,
+which is "H".
+
+5. It prints out "H" when I dereference it and print it out.
+
+6. When I did that, it worked as expected.
+*(messagePtr + 1) gave me E, + 2 gave me L, and so on.
+
+7. for (int i = 0; i < strlen(messagePtr); i++) {
+        printf("%c\n", *(messagePtr + i));
+    }
+
+8. int i = 0;
+    while (messagePtr[i] != NULL) {
+        printf("%c\n", *(messagePtr + i));
+        i++;
+    }
+
+9. void printReverse(char* string) {
+        int i = 0;
+        int string_length;
+
+        while (string[i] != NULL) {
+            i++;
+        }
+        string_length = i;
+
+        for (string_length > 0; string_length--;) {
+            printf("%c\n", *(string+string_length));
+        }
+    };
+
+10. char* reverseString( char* input ){
+
+//1. First count how many characters are in the input string
+int i = 0;
+int num_chars_in_input;
+
+while (input[i] != NULL) {
+    i++;
+};
+num_chars_in_input = i;
+
+//This creates enough space to store the reversed string, plus one more byte
+//for the null terminator
+char* output = (char*)malloc( num_chars_in_input+1 );
+
+//2. Copy the input string to the output string in reverse order. There are
+//multiple ways to do this- consider using a counter, or consider using two
+//pointers. 
+
+int j = 0;
+for (num_chars_in_input > 0; num_chars_in_input--;) {
+    output[j] = input[num_chars_in_input];
+    j++;
+}
+
+//REMEMBER THAT YOUR OUTPUT STRING MUST END WITH A NULL TERMINATOR. This is not
+//provided for you automatically- you must put it there!
+
+    return output; 
+}
