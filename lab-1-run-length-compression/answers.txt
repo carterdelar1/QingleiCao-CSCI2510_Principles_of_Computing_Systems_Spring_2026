@@ -1,0 +1,77 @@
+1.  As the answer to the first exercise, list the name(s) of the people
+    who worked together on this lab:
+
+It was just myself, Carter DeLargy, who worked on this lab.
+
+2.  This compression technique works well in some cases, and poorly in
+    others. Give an example of each.
+
+One example of good compression was with the 1mil_strong_bias. 
+The original size was 1000000 bytes, but using a compression length of 4 it cut it down
+to 748910 bytes, which is around 75% of the original size.
+
+One example of poor compression was with test4, where the original size
+was 3217782 bytes. Compressing it with a length of 4 resulted in a file that's
+4020378 bytes, whihc is around 800000 bytes larger than the original.
+
+3.  The *compression ratio* can be computed as (size before
+    compression)/(size after compression). For example if the original
+    file size is 20,000 bytes and the compressed size is 15,000 bytes
+    then the compression ratio is 1.33. There are three files above of
+    size one million bytes each: 1mil\_random, 1mil\_weak\_bias, and
+    1mil\_strong\_bias. Each of these files contains the numbers 0-4 in
+    random order, but the random file contains all numbers distrbuted
+    evenly, while the weak and strong bias files shift the distribution
+    so that the lower number values occur more often. For example, zero
+    occurs about 20% of the time in the random file, about 75% of the
+    time in the weak bias file, and about 90% of the time in the strong
+    bias file.
+
+    Which file do you think will compress best? Compute the compression
+    ratio for each file with a compression length of one.
+
+    I believe that the strong bias one will compress best.
+
+    compression ratio of 1mil_random with compression length of one: 0.62545814809
+    compression ratio of 1mil_weak_bias with compression length of one: 1.17444777466
+    compression ratio of 1mil_strong_bias with compression length of one: 2.44448572909
+
+4.  The Bash shell includes the nifty command `time`, which records how
+    long a command runs. Record how long it takes to compress the file
+    `test4`. The syntax in this case is
+    \"`time ./rle test4 output 1 0`\". This will report three
+    measurements: real, user, and sys. How long does your program take
+    to run in real time?
+
+    It takes 3.712 seconds to run in real time.
+
+5.  Try the above command again but with a compression length of ten,
+    how long does your program take now? Which operations happen more or
+    less frequently now? Formulate a hypothesis as to the difference.
+
+    With a compression length of ten it only takes 0.397 seconds.
+    This must be because it isn't reading and writing from the file nearly as often. 
+    This means less system calls.
+
+6.  Indicate which, if any, extra credit exercises have you have
+    attempted:
+
+I've attempted both extra credits.
+
+1st extra credit:
+The compression ratio for slu_logo.bmp was 36.9708727687 using
+a compression length of 1.
+
+For the png, the compression ratio of slu_logo.png was 0.53556490813 using a
+compression length of 1.
+
+For the jpeg, the compression ratio of slu_logo.jpeg was 0.50191207513 using a
+compression length of 1.
+
+2nd extra credit:
+
+(slu_logo.bmp)/(compressed.bmp) = 36.9708727687
+(slu_logo.bmp)/(slu_logo.png) = 40.0835680827
+(slu_logo.bmp)/(slu_logo.jpeg) = 16.719946632
+
+I can't tell the difference between any of these three images.
