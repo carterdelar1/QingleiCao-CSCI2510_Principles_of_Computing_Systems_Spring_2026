@@ -39,7 +39,7 @@ was 3217782 bytes. Compressing it with a length of 4 resulted in a file that's
 4.  The Bash shell includes the nifty command `time`, which records how
     long a command runs. Record how long it takes to compress the file
     `test4`. The syntax in this case is
-    \"`time ./rle test4 output 1 0`\". This will report three
+    "time ./rle test4 output 1 0". This will report three
     measurements: real, user, and sys. How long does your program take
     to run in real time?
 
