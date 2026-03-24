@@ -60,7 +60,7 @@ I've attempted both extra credits.
 
 1st extra credit:
 The compression ratio for slu_logo.bmp was 36.9708727687 using
-a compression length of 1.
+a compression length of 1. 
 
 For the png, the compression ratio of slu_logo.png was 0.53556490813 using a
 compression length of 1.
@@ -70,8 +70,8 @@ compression length of 1.
 
 2nd extra credit:
 
-(slu_logo.bmp)/(compressed.bmp) = 36.9708727687
-(slu_logo.bmp)/(slu_logo.png) = 40.0835680827
-(slu_logo.bmp)/(slu_logo.jpeg) = 16.719946632
+uncompressed.bmp = 24883254
 
-I can't tell the difference between any of these three images.
+bmp compression = 24883253/48099632 = 0.5173273259 compression ratio
+jpg compression = 24883253/1316685 = 18.89841002 compression ratio
+png compression = 24883253/11827507 = 2.103845975 compression ratio
