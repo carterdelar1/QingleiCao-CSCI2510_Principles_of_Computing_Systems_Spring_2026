@@ -1,0 +1,68 @@
+1. my outputs were:
+process pid: 6973
+process pid: 6980
+process pid: 6981
+
+2. 
+process pid: 7234
+process pid: 7235
+
+now, i get two different processes with different PIDs.
+
+3. on a success, the return value of the parent is the PID of the child process,
+and the child has a return value of 0.
+
+on failure, a -1 is returned in the parent and no child process is created.
+
+4. 
+i'm the adult process. process id: 19830
+i'm the child process. process id: 0
+
+5. it immediately prints out the adult process, and then
+acts like there's nothing left but then it prints out the child process
+in my command line.
+
+6. now it waits three seconds and prints out the child process
+and the adult process at the same time. it prints the child process first.
+
+7. 
+total 32
+-rw-r--r-- 1 carterdelar1 carterdelar1  5946 Mar 24 14:03 README.md
+-rw-r--r-- 1 carterdelar1 carterdelar1   746 Mar 24 16:01 answers.txt
+-rwxr-xr-x 1 carterdelar1 carterdelar1 16088 Mar 24 15:58 fork
+-rw-r--r-- 1 carterdelar1 carterdelar1   372 Mar 24 15:58 fork.c
+
+8. 
+i'm the child process. process id: 0
+total 32
+-rw-r--r-- 1 carterdelar1 carterdelar1  5946 Mar 24 14:03 README.md
+-rw-r--r-- 1 carterdelar1 carterdelar1  1026 Mar 24 16:03 answers.txt
+-rwxr-xr-x 1 carterdelar1 carterdelar1 16184 Mar 24 16:04 fork
+-rw-r--r-- 1 carterdelar1 carterdelar1   496 Mar 24 16:04 fork.c
+i'm the adult process. process id: 20890
+
+optional enrichment exercises:
+
+1. 
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main () {
+    pid_t fork1 = fork();
+
+    char* child_argv[] = {"echo", "hello world", NULL};
+    char* child_prog = child_argv[0];
+
+    // printf("process pid: %d\n", fork1);
+    if (fork1 == 0) {
+        sleep(3);
+        printf("i'm the child process. process id: %d\n", fork1);
+        execvp(child_prog, child_argv);
+    } else {
+        waitpid(fork1, NULL, 0);
+        printf("i'm the adult process. process id: %d\n", fork1);
+    }
+}
+
+2. 
