@@ -28,4 +28,24 @@ int main() {
 3. pipefd[0] refers to the read end of the pipe, and
 pipefd[1] refers to the write end.
 
-4. 
+4. when the function succeeds, it silently closes newdf before reusing it.
+
+5. 
+this is my dup2 for the first child:
+dup2(fd[1], STDOUT_FILENO);
+
+this is my dup2 for the second child:
+dup2(fd[0], STDIN_FILENO);
+
+6. 
+Program 2 got: Hello, world
+
+7. 
+Program 2 got: Hello, world
+
+8. One advantage is that, because neither program depends on the other,
+it's very modular. You can change how program1 operates and that doesn't affect program2 except
+for what it's being given from program1's output.
+Another advantage could be that it can work with any type of file,
+like the question says. This could mean a real file, or it could even be something
+like a network socket.
