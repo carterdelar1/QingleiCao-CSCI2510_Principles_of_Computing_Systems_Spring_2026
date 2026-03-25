@@ -1,0 +1,31 @@
+1.
+program 1:
+#include <stdio.h>
+
+int main() {
+    fprintf(stdout, "Hello, world\n");
+    return 0;
+}
+
+program 2:
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main() {
+    char input_string[100];
+    int i = 0;
+    while (i == 0) {
+        if (fgets(input_string, sizeof(input_string), stdin) == NULL) break;
+        printf("Program 2 got: %s\n", input_string);
+    }
+
+    return 0;
+}
+
+2. Hello, world
+
+3. pipefd[0] refers to the read end of the pipe, and
+pipefd[1] refers to the write end.
+
+4. 
