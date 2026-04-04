@@ -68,15 +68,15 @@ void execute_commands(char* processes[], int current_process) {
         if (my_argv[0] != NULL) {
             int ret = execvp(my_argv[0], my_argv);
             if (ret == -1) {
-                perror(my_argv[0]);
+                fprintf(stderr, "%s: Not found\n", my_argv[0]);
                 exit(1);
             }
         }
         exit(0);
     } else {
         if (current_process > 0) {
-            dup2(fd[0], STDIN_FILENO);
             close(fd[1]);
+            dup2(fd[0], STDIN_FILENO);
             close(fd[0]);
         }
 
@@ -88,7 +88,8 @@ void execute_commands(char* processes[], int current_process) {
 }
 
 void signal_handler(int signum) {
-    printf("\nslush> ");
+    // printf("\n");
+    write(STDOUT_FILENO, "\nslush> ", 9);
 }
 
 
@@ -106,10 +107,35 @@ int main() {
     char* processes_ptr;
 
     char input_string[256];
-    while (printf("slush> "), fgets(input_string, sizeof(input_string), stdin) != NULL) {
+    // while (printf("slush> "), fgets(input_string, sizeof(input_string), stdin) != NULL) {
+    while (1) {
+        printf("slush> ");
+
+        
+
+        if (fgets(input_string, sizeof(input_string), stdin) == NULL) {
+            if (feof(stdin)) {
+                break;
+            }
+
+           
+
+            printf("\n");
+            continue;
+        }
 
         input_string[strcspn(input_string, "\n")] = 0;
         if (strlen(input_string) == 0) continue;
+
+        if (strncmp(input_string, "cd ", 3) == 0) {
+            char* path = input_string + 3;
+            if (chdir(path) != 0) {
+                perror("error with cd");
+            }
+            continue;
+        }
+
+        
 
         // checks to see if the last thing in the input string is a (
         // if so, it gives the error "Invalid null command"
@@ -120,6 +146,7 @@ int main() {
 
         processes_ptr = strtok(input_string, "(");
         int process_count = 0;
+        int error = 0;
         while (processes_ptr != NULL) {
            
             char* check = processes_ptr;
@@ -129,12 +156,17 @@ int main() {
 
             if (*check == '\0') {
                 fprintf(stderr, "Invalid null command\n");
+                error = 1;
                 break;
             }
 
             processes[process_count] = processes_ptr;
             process_count++;
             processes_ptr = strtok(NULL, "(");
+        }
+
+        if (error == 1 || process_count == 0) {
+            continue;
         }
 
         
