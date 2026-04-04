@@ -17,6 +17,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <signal.h>
 
 void execute_commands(char* processes[], int current_process) {
     if (current_process < 0) {
@@ -40,6 +41,7 @@ void execute_commands(char* processes[], int current_process) {
     }
 
     if (pid == 0) {
+        signal(SIGINT, SIG_DFL);
         if (current_process > 0) {
             dup2(fd[1], STDOUT_FILENO);
             close(fd[0]);
@@ -85,8 +87,15 @@ void execute_commands(char* processes[], int current_process) {
 
 }
 
+void signal_handler(int signum) {
+    printf("\nslush> ");
+}
+
+
 
 int main() {
+    signal(2, signal_handler);
+
     int max_args = 15;
     int max_argv_size = max_args + 2;
     char* cmd;
@@ -97,7 +106,7 @@ int main() {
     char* processes_ptr;
 
     char input_string[256];
-    while (fgets(input_string, sizeof(input_string), stdin) != NULL) {
+    while (printf("slush> "), fgets(input_string, sizeof(input_string), stdin) != NULL) {
 
         input_string[strcspn(input_string, "\n")] = 0;
         if (strlen(input_string) == 0) continue;
