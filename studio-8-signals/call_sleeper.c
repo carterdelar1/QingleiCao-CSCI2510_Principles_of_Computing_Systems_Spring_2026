@@ -3,8 +3,16 @@
 #include <unistd.h> //fork(), execvp(), perror(), waidpid() 
 #include <stdlib.h> //For exit()
 #include <stdio.h> //For printf()
+#include <sys/types.h>
+#include <signal.h>
+
+void signal_handler(int signum) {
+	printf("the program is ignoring SIGINT\n");
+}
 
 int main( int argc, char* argv[] ){
+
+	signal(2, signal_handler);
 
 	pid_t ret;
 
