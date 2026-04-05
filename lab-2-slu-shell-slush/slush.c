@@ -88,8 +88,8 @@ void execute_commands(char* processes[], int current_process) {
 }
 
 void signal_handler(int signum) {
-    // printf("\n");
-    write(STDOUT_FILENO, "\nslush> ", 9);
+    printf("\n");
+    // write(STDOUT_FILENO, "\nslush> ", 9);
 }
 
 
@@ -109,16 +109,29 @@ int main() {
     char input_string[256];
     // while (printf("slush> "), fgets(input_string, sizeof(input_string), stdin) != NULL) {
     while (1) {
-        printf("slush> ");
+        char cwd[1000];
+        char* homedir = getenv("HOME");
 
-        
+        if (getcwd(cwd, sizeof(cwd)) != NULL) {
+            if (homedir != NULL) {
+                char* homedirpath = cwd + strlen(homedir);
+
+                if (*homedirpath == '/') {
+                    homedirpath++;
+                }
+                
+            printf("slush|%s>", homedirpath);
+                
+            } else {
+                perror("Error getting directory");
+                printf("slush> ");
+                }
+            }        
 
         if (fgets(input_string, sizeof(input_string), stdin) == NULL) {
             if (feof(stdin)) {
                 break;
             }
-
-           
 
             printf("\n");
             continue;

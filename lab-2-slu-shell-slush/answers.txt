@@ -1,0 +1,10 @@
+1. One issue I'm having is I'm not sure how to have
+my signal handler clear the input line
+and rerun the while loop without the user having to press enter.
+I had a work around with writing to STDFILEOUT, but with how
+I did the extra credit, I'm not sure how I could continue to do that.
+
+I have my previous way of doing it commented out.
+
+2. I've completed the extra credit
+where it displays the current working directory.
