@@ -1,0 +1,55 @@
+1. 
+void* adder(void* arg) {
+    for (int i = 0; i < 2000000; i++) {
+        race++;
+    }
+}
+
+void* subtractor(void* arg) {
+    for (int i = 0; i < 2000000; i++) {
+        race--;
+    }
+}
+
+2. If I execute these in main, it should either add or subtract two million,
+then do the opposite, so race is back at 0, which is what I had it at originally.
+
+3. If they're executed simultaneously, then the answer won't be zero.
+This is because the threads will try to do the same things at the same time, meaning
+there will be issues with reading and writing to the registers.
+
+This means that I think race could have a random value.
+
+4.
+execution 1:
+value of race: -1303280
+
+execution 2:
+value of race: 641266
+
+execution 3:
+value of race: -1087268
+
+execution 4:
+value of race: 273362
+
+5. I was right. They're both trying to read and write
+at the same time at points, causing issues.
+I think that the maximum and minimum it could ever be is 2 million or negative 2 million.
+
+6. The behavior is still occuring when at 1 million and 500,000.
+
+At 100 iterations, it was zero almost every time. I ran it about 20 times, and it was 1000 one time and -562 the other time,
+but besides that it was zero.
+
+7. It would exist because the threads still take turns,
+and one thread could let the other go when it's in the middle of reading and writing.
+
+8. Using the given command, it is still giving me random responses.
+It does seem though that about half the time I am getting 0.
+I'm also getting 2000000 sometimes.
+
+9. This time, I'm never getting zero. I'm getting random numbers each time between 200 million and negative 200 million.
+
+10. I think the reason I didn't get 0 is because with 2 million, I was getting zeroes sometimes because it's more rare for it to stop
+when it's reading and writing. With 200 million, there's a higher chance of it happening.
