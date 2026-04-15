@@ -1,0 +1,57 @@
+1. the return type and the specified argument types are
+all void *
+
+2. void* thread_entry(void* arg) {
+    printf("Thread entry function running");
+    return NULL;
+}
+
+3. Thread entry function running
+
+4. struct thread_struct{
+        int arg1;
+        char arg2[256];
+        int ret;
+    };
+
+5. 
+Thread entry function running
+thread arg1: 15
+thread arg2: hello
+thread ret: 0
+
+6. the output now:
+
+Thread entry function running
+thread arg1: 15
+thread arg2: hello
+thread ret: 0
+ret value after thread entry: 10
+
+7. 
+Thread entry function running
+thread arg1: 0
+thread arg2: This is thread 0
+thread ret: 0
+Thread entry function running
+thread arg1: 1
+thread arg2: This is thread 1
+thread ret: 0
+Thread entry function running
+thread arg1: 2
+thread arg2: This is thread 2
+thread ret: 0
+Thread entry function running
+thread arg1: 3
+thread arg2: This is thread 3
+thread ret: 0
+Thread entry function running
+thread arg1: 4
+thread arg2: This is thread 4
+thread ret: 0
+
+8. I noticed that the order
+of the threads is random. Sometimes it's in order
+but other times it's not at all.
+I think this is because all the threads operate at the same time,
+so they just all work at it and it's random which finishes first.
