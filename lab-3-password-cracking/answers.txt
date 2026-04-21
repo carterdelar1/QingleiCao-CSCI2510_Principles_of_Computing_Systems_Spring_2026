@@ -1,0 +1,100 @@
+1. Carter DeLargy
+
+2. pass
+
+3. ferry
+
+4. 
+real    0m43.305s
+user    0m44.132s
+sys     0m0.000s
+
+5.
+two threads:
+real    0m24.882s
+user    0m47.239s
+sys     0m0.000s
+
+four threads:
+real    0m18.326s
+user    0m51.075s
+sys     0m0.001s
+
+eight threads:
+real    0m9.782s
+user    1m0.395s
+sys     0m0.023s
+
+thirteen threads:
+real    0m5.357s
+user    1m13.753s
+sys     0m0.014s
+
+twenty-six threads:
+real    0m4.838s
+user    1m47.042s
+sys     0m0.302s
+
+6. 
+two thread hash rate:
+0.08038
+four thread hash rate:
+0.218269
+eight thread hash rate:
+0.817829
+thirteen thread hash rate:
+2.42673
+twenty-six thread hash rate:
+5.374122
+
+7. it seems like with two threads, it does run twice as fast.
+this changes when more threads are added. it seems like twice as fast as
+two threads would be closer to six rather than four threads.
+i think that it is about twice as fast with two threads because
+i split the alphabet directly in half.
+
+8. the maximum hash rate i recorded was 5.374122, from twenty six threads.
+
+9. because there are twenty six characters, then its
+26^1 + 26^2 + 26^3 + 26^4 + 26^5 + 26^6 + 26^7 + 26^8 = 
+217180147158 hashes
+
+10. 
+26^5 / 4.838 = 2455844 hashes/second
+
+26^1 / 2455844 = 0.00001 seconds
+26^2 / 2455844 = 0.00028 seconds
+26^3 / 2455844 = 0.0072 seconds
+26^4 / 2455844 = 0.18608 seconds
+26^5 / 2455844 = 4.838 seconds
+26^6 / 2455844 = 125.788 seconds
+26^7 / 2455844 = 3270.4888 seconds
+26^8 / 2455844 = 85032.708 seconds
+
+increasing key length drastically increases the length it takes.
+
+11. max hash rate of 2455844 so:
+52^6 (lower and upper) / 2455844 = 8050.434 seconds
+62^6 (lower, upper, digits) / 2455844 = 23128.601 seconds
+93^6 (lower, upper, digits, symbols) / 2455844 = 263449.2189 seconds
+
+12. I'm unsure of any bugs or if I deviate at all from the specifications.
+
+13. For extra credit, I've attemped the first two.
+
+Extra Credit:
+
+1. Crack the following five-letter password hashes:
+abA.g8pU2Iffo: salts
+cdfnIXMyMCpPg: salts
+efgC/gw8PDKhs: salts
+ghLneTdBMxJP.: salts
+ijSsXTgIC7QRU: salts
+klr7dT7cAODsk: donot
+mn4iWfK0m76t6: skipp
+opjPsgpXaahxM: anyyy
+qr6ncfvfqecME: salts
+
+2. This is because it adds unique data to a password before hashing
+which means that even identical passwords will have different hashes.
+
