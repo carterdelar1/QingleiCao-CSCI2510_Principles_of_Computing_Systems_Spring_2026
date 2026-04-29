@@ -1,0 +1,108 @@
+1. 
+pthread_mutex_t mutex;
+
+if (pthread_mutex_init(&mutex, NULL) != 0) {
+    printf("error setting up mutex");
+    exit(1);
+}
+
+2. 
+
+3. If I synchronize my accesses, then the result should be 0.
+This is because they won't be overwriting each other.
+This might take slightly longer because the threads are waiting for each other, because one will be locked.
+
+4. Yes, it mostly matched my expectations. I am consistently getting zero.
+The program is taking even longer than I was expecting, taking around 15-20 seconds.
+
+program outputs:
+
+value of race: 0
+
+value of race: 0
+
+value of race: 0
+
+5. 
+$ time ./race_conditions
+value of race: 4788497
+
+real    0m0.085s
+user    0m0.142s
+sys     0m0.001s
+
+$ time ./race_conditions
+value of race: -865273
+
+real    0m0.079s
+user    0m0.137s
+sys     0m0.004s
+
+$ time ./race_conditions
+value of race: 2301550
+
+real    0m0.074s
+user    0m0.128s
+sys     0m0.004s
+
+average time:
+(0.085)+(0.079)+(0.074) / 3 = 0.0793
+so average time of 0.0793
+
+6. 
+value of race: 0
+
+real    0m2.384s
+user    0m2.897s
+sys     0m1.553s
+
+value of race: 0
+
+real    0m2.238s
+user    0m3.076s
+sys     0m1.170s
+
+value of race: 0
+
+real    0m2.444s
+user    0m2.763s
+sys     0m1.881s
+
+this time, the average real time was: 2.3553
+
+this took 2.276 seconds longer
+
+7. 
+value of race: 0
+
+real    0m0.094s
+user    0m0.091s
+sys     0m0.000s
+
+value of race: 0
+
+real    0m0.101s
+user    0m0.096s
+sys     0m0.000s
+
+value of race: 0
+
+real    0m0.104s
+user    0m0.101s
+sys     0m0.004s
+
+this time, the real time average was: 0.09967
+
+this is only 0.02037 seconds longer than the original, race program.
+
+8. I think this is because it takes a bit to lock each thread,
+and this time adds up over the 20 million locking and unlocking for the adder
+and subtractor.
+
+9.
+I feel as though the per-iteration locking is best if you
+need an update for every item quickly like messages online.
+This is because each thread is working on their iteration and letting the other go.
+
+The per-thread locking strategy could be best if you need
+something to happen as fast as possible, like doing math or inserting data into a table.
